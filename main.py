@@ -6,15 +6,16 @@ from the same directory as this script (not the current working
 directory), so `python3 main.py` works from anywhere.
 """
 
-import os
 import shutil
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SRC = HERE / "entry.png"
 
-# Honor MAKEFUN_BOT_DIR if set, but the output is always /output/entry.png.
-OUTPUT_DIR = Path(os.environ.get("MAKEFUN_BOT_DIR", "/output"))
+# The output is always /output/entry.png. MAKEFUN_BOT_DIR is the bot
+# directory (/bot) where the repo lives, NOT the output directory —
+# writing there fails when /bot is read-only in the grader.
+OUTPUT_DIR = Path("/output")
 DST = OUTPUT_DIR / "entry.png"
 
 
