@@ -20,6 +20,11 @@ DST = OUTPUT_DIR / "entry.png"
 
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    if not SRC.exists():
+        raise FileNotFoundError(
+            f"entry.png not found at {SRC} — entry.png must be present "
+            "in the same directory as main.py"
+        )
     shutil.copyfile(SRC, DST)
     size = DST.stat().st_size
     print(f"OK entry.png copied ({size} bytes)")
